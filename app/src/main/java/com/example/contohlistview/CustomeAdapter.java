@@ -5,8 +5,11 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,6 +38,14 @@ public class CustomeAdapter extends ArrayAdapter<DataModel> implements View.OnCl
 
     @Override
     public void onClick(View view) {
+        int position = (Integer) view.getTag();
+        Object object = getItem(position);
+        DataModel dataModel = (DataModel) object;
+        switch (view.getId()) {
+            default:
+                Toast.makeText(getContext(), (CharSequence) dataModel.getName(), Toast.LENGTH_SHORT).show();
+            break;
+        }
     }
 
     @NonNull
@@ -58,6 +69,8 @@ public class CustomeAdapter extends ArrayAdapter<DataModel> implements View.OnCl
             viewHolder = (ViewHolder) convertView.getTag();
             result = convertView;
         }
+
+//        Animation ani = AnimationUtils.loadAnimation(mContext,)
 
         viewHolder.tvName.setText(dataModel.getName());
         viewHolder.tvType.setText(dataModel.getType());
